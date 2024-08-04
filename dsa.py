@@ -1,10 +1,10 @@
-class LinkedList:
-  class Node:
-    __slots__ = 'value, next'
-    def __init__(self, value: int, next=None) -> None:
-      self.value = value
-      self.next = next
+from typing import List
+
+def binary_search(target: int, nums: List[int]=[]) -> int:
   
-  def __init__(self, head: Node=None) -> None:
-    self.head = head
-  
+  return -1
+
+nums = [4, 2, 1, 3]
+print(nums)
+nums = binary_search(3, nums)
+print(nums)
