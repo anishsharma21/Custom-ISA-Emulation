@@ -9,7 +9,7 @@ def binary_search(target: int, nums: List[int]=[]) -> int:
     elif target < nums[m]:
       h = m - 1
     else:
-      l = m + 1
+      l = m + 1 
   return -1
 
 nums = [1, 2, 3, 4, 5, 6, 7]
