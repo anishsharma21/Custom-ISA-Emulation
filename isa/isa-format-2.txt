@@ -1,16 +1,19 @@
 /*
 Last updated: 15th August 2024
 
-This is the "raw memory" format. An address is stated to initiate the process of memory input. This memory input can be code (opcodes) or plain memory that can be be manipulated by code and program. 
+This is the "raw memory" format. Programs are composed of "memory allocation blocks", or MAB's for short. To begin a MAB, first declare a starting address where data allocations will begin from. Then, each newline following this declaration will contain 2 bytes of data stored in the contiguous section of memory. This memory input can be code (opcodes) or just plain data. 
+It should be noted though that instructions are read in 3 bytes at a time where the first byte is translated to an opcode, then the following 2 bytes refer to a 16-bit memory address. A table for the ISA can be found in the isa-instructions.txt file. 
+
+Example:
 
 [ADDRESS]:
 ##h
 ##h
 ...
 
-Format is specified above but the breakdown is an address followed by a colon indicating the start of memory input - this can be both code and data, and can be initiated at any start memory. More difficult to program, but more flexible as data can be written over again - you can initiate memory input on the same input if desired. 
+This differs from the "structured" approach since there is no distinction made between code allocated (program) memory and data allocated memory. As such, program allocated memory looks the exact same as data allocated memory, and newlines cannot be added between each instruction as is alternatively the case in the "structured" approach. The "raw memory" approach can be useful for simple programs, but requires allocation of memory in a mostly contiguous manner (unless new MAB declarations are created for each instruction), making it difficult to distinguish between instructions in the memory.
 
-Program below simply adds two 8-bit numbers and stores it right after in memory.
+Program below simply adds two 8-bit numbers and stores it in the memory address directly after. 
 
 */
 
