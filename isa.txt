@@ -1,0 +1,18 @@
+** Instruction Set Architecture for my relay-powered Von Neumann Architecture **
+
+------------------------------------------
+| Operation            | Code | Mnemonic |
+------------------------------------------
+| Load                 | 10h  | LOD      |
+| Store                | 11h  | STO      |
+| Add                  | 20h  | ADD      |
+| Subtract             | 21h  | SUB      |
+| Add with Carry       | 22h  | ADC      |
+| Subtract with Borrow | 23h  | SBB      |
+| Jump                 | 30h  | JMP      |
+| Jump if Zero         | 31h  | JZ       |
+| Jump if Carry        | 32h  | JC       |
+| Jump if Not Zero     | 33h  | JNZ      |
+| Jump if Not Carry    | 34h  | JNC      |
+| Halt                 | FFh  | HLT      |
+------------------------------------------
