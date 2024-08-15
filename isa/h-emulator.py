@@ -9,7 +9,7 @@ while True:
     file_name += ".txt"
 
   try:
-    file: TextIO = open(f'programs/{file_name}', 'r')
+    file: TextIO = open(f'../programs/{file_name}', 'r')
     print(file.read())
     file.close()
   except FileNotFoundError:
