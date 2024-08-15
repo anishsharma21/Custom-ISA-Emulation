@@ -28,5 +28,5 @@ Operation format (machine language):
 [ADDRESS]: [HIGH-BYTE]
 [ADDRESS]: [LOW-BYTE]
 
-Follows Big-endian format (high-byte stored in lower address)
+Follows Little-endian format (lower-byte stored in lower address)
 Implementations can be done in ISA or machine language format - goal is to create assemblers/compilers and emulators for both in Python

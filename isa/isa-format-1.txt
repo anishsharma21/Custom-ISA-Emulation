@@ -1,0 +1,30 @@
+/*
+Last updated: 15th August 2024
+
+"c:" - indicates code/instructions in memory
+"d:" - indicates data in memory
+
+Code blocks are partitioned into sets of instructions separated by new-lines - each instruction is structured into 3 contiguous bytes in memory, the first is an instruction/opcode, then the next 2 bytes refer to a 16-bit memory address
+
+Data blocks should be written one line after another for each consequent address
+
+[c/d]:[START] - this indicates the initiation of either a code or data block at a start memory address. Code blocks must come before data blocks. You can only have one code block, and you can have multiple data blocks.
+*/
+
+c:0000h
+10h
+10h
+00h
+
+20h
+10h
+01h
+
+11h
+10h
+02h
+
+d:1000h
+01h
+02h
+00h

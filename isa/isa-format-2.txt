@@ -1,0 +1,31 @@
+/*
+Last updated: 15th August 2024
+
+This is the "raw memory" format. An address is stated to initiate the process of memory input. This memory input can be code (opcodes) or plain memory that can be be manipulated by code and program. 
+
+[ADDRESS]:
+##h
+##h
+...
+
+Format is specified above but the breakdown is an address followed by a colon indicating the start of memory input - this can be both code and data, and can be initiated at any start memory. More difficult to program, but more flexible as data can be written over again - you can initiate memory input on the same input if desired. 
+
+Program below simply adds two 8-bit numbers and stores it right after in memory.
+
+*/
+
+0000h:
+10h
+10h
+00h
+20h
+10h
+01h
+11h
+10h
+02h
+
+1000h:
+01h
+02h
+00h
