@@ -1,0 +1,50 @@
+/*
+This program loads in value at memory 0021h, then adds the value at memory location 0023h.
+Then, it stores the current accumulator value at address 0025h.
+Then, it loads value at address 0020h, then adds the value at address 0022h.
+Then, it stores the current accumulator value at address 0024h, before halting.
+*/
+
+0000h: 10h
+0001h: 00h
+0002h: 21h
+
+0003h: 20h
+0004h: 00h
+0005h: 23h
+
+0006h: 11h
+0007h: 00h
+0008h: 25h
+
+0009h: 10h
+000Ah: 00h
+000Bh: 20h
+
+000Ch: 22h
+000Dh: 00h
+000Eh: 22h
+
+000Fh: 11h
+0010h: 00h
+0011h: 24h
+0012h: FFh
+0013h: 
+0014h: 
+0015h: 
+0016h: 
+0017h: 
+0018h: 
+0019h: 
+001Ah: 
+001Bh: 
+001Ch: 
+001Dh: 
+001Eh: 
+001Fh: 
+0020h: 00h
+0021h: 01h
+0022h: 00h
+0023h: 02h
+0024h: 
+0025h:  
