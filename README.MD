@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project involves creating a custom Instruction Set Architecture (ISA) specification and providing emulations of both machine language and ISA versions of written programs. The goal is to create a Python program that can take in instructions from any of the custom program formats I have defined and emulate changes to the memory, printing the entire memory set in the terminal. This allows viewers to see the memory change in real-time, with each instruction cycle being shown. Each instruction is 3 bytes long, and as the counter increases and the program progresses, each address is highlighted to show what is happening.
+This project involves creating a custom Instruction Set Architecture (ISA) specification and providing terminal emulations of both machine language and ISA versions of written programs. The goal is to create a Python program that can take in instructions from any of the custom program formats I have defined and emulate changes to the memory, printing the entire memory set in the terminal. This allows viewers to see the memory change in real-time, with each instruction cycle being shown. Each instruction is 3 bytes long, and as the counter increases and the program progresses, each address is highlighted to show what is happening. Inspired by the book *CODE: The Hidden Language of Hardware and Software*.
 
 ## ISA Specification
 

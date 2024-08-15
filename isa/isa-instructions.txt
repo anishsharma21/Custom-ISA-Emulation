@@ -18,7 +18,7 @@
 ------------------------------------------
 
 A - accumulator
-Memory range = [0000h - FFFFh] (64KB memory, 16-bit addresses)
+Memory range = [0000h - FFFFh] (64KB memory, 16-bit addresses, 8192x8 RAM)
 
 Operation format (ISA):
 [MNEMONIC] [DESTINATION].[SOURCE]
@@ -29,4 +29,4 @@ Operation format (machine language):
 [ADDRESS]: [LOW-BYTE]
 
 Follows Little-endian format (lower-byte stored in lower address)
-Implementations can be done in ISA or machine language format - goal is to create assemblers/compilers and emulators for both in Python
+Implementations can be done in ISA or machine language format - goal is to create assemblers/compilers and emulators for both in Python such that program running and memory updates can be viewed in realtime.
