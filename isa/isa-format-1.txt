@@ -1,14 +1,19 @@
 /*
 Last updated: 15th August 2024
 
-"c:" - indicates code/instructions in memory
-"d:" - indicates data in memory
+This is the "structured" approach.
 
-Code blocks are partitioned into sets of instructions separated by new-lines - each instruction is structured into 3 contiguous bytes in memory, the first is an instruction/opcode, then the next 2 bytes refer to a 16-bit memory address
+[c/d]:[START] - this indicates the initiation of either a code or data block at a start memory address. Code blocks must come before data blocks. You can only have one code block, and you can have multiple data blocks
 
-Data blocks should be written one line after another for each consequent address
+"c:" - indicates code/instructions in memory to follow
+"d:" - indicates data in memory to follow
 
-[c/d]:[START] - this indicates the initiation of either a code or data block at a start memory address. Code blocks must come before data blocks. You can only have one code block, and you can have multiple data blocks.
+Code blocks are partitioned into sets of instructions separated by new-lines - each instruction is structured into 3 contiguous bytes in memory, the first is an instruction/opcode, then the next 2 bytes refer to a 16-bit memory address. This makes it easy to distinguish between unique instructions.
+
+Data blocks are just written with each newline denoting the byte value at that address following the starting address in order.
+
+The following program is written in the "structured" format and adds two 8-bit numbers and then stores the sum in the address right after the two numbers.
+
 */
 
 c:0000h
