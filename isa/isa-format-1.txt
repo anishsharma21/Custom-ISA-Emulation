@@ -1,7 +1,7 @@
 /*
 Last updated: 15th August 2024
 
-This is the "structured" approach.
+This is the "structured" format.
 
 [c/d]:[START] - this indicates the initiation of either a code or data block at a start memory address. Code blocks must come before data blocks. You can only have one code block, and you can have multiple data blocks
 
