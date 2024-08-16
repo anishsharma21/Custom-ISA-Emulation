@@ -30,3 +30,5 @@ Operation format (machine language):
 
 Follows Little-endian format (lower-byte stored in lower address)
 Implementations can be done in ISA or machine language format - goal is to create assemblers/compilers and emulators for both in Python such that program running and memory updates can be viewed in realtime.
+
+Both Machine Language and ISA formats can be found under the 'isa' directory. Example programs can be found in the 'programs' directory.

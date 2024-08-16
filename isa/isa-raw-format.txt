@@ -1,7 +1,9 @@
 /*
 Last updated: 15th August 2024
 
-This is the "raw memory" format. Programs are composed of "memory allocation blocks", or MAB's for short. To begin a MAB, first declare a starting address where data allocations will begin from. Then, each newline following this declaration will contain 2 bytes of data stored in the contiguous section of memory. This memory input can be code (opcodes) or just plain data. 
+This is the "raw memory" format. 
+
+Programs are composed of "memory allocation blocks", or MAB's for short. To begin a MAB, first declare a starting address where data allocations will begin from. Then, each newline following this declaration will contain 2 bytes of data stored in the contiguous section of memory. This memory input can be code (opcodes) or just plain data. 
 It should be noted though that instructions are read in 3 bytes at a time where the first byte is translated to an opcode, then the following 2 bytes refer to a 16-bit memory address. A table for the ISA can be found in the isa-instructions.txt file. 
 
 Example:
