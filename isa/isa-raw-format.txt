@@ -29,6 +29,7 @@ Program below simply adds two 8-bit numbers and stores it in the memory address 
 11h
 10h
 02h
+FFh
 
 1000h:
 01h
