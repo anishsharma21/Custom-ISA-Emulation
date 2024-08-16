@@ -15,7 +15,7 @@ Example:
 
 This differs from the "structured" approach since there is no distinction made between code allocated (program) memory and data allocated memory. As such, program allocated memory looks the exact same as data allocated memory, and newlines cannot be added between each instruction as is alternatively the case in the "structured" approach. The "raw memory" approach can be useful for simple programs, but requires allocation of memory in a mostly contiguous manner (unless new MAB declarations are created for each instruction), making it difficult to distinguish between instructions in the memory.
 
-Program below simply adds two 8-bit numbers and stores it in the memory address directly after. 
+Program below simply adds two 8-bit numbers and stores it in the memory address directly after. More examples can be found in the `programs` directory.
 
 */
 

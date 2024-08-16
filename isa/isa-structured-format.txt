@@ -12,7 +12,7 @@ Code blocks are partitioned into sets of instructions separated by new-lines - e
 
 Data blocks are just written with each newline denoting the byte value at that address following the starting address in order.
 
-The following program is written in the "structured" format and adds two 8-bit numbers and then stores the sum in the address right after the two numbers.
+The following program is written in the "structured" format and adds two 8-bit numbers and then stores the sum in the address right after the two numbers. More examples can be found in the `programs` directory.
 
 */
 

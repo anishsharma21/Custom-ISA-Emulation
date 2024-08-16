@@ -5,13 +5,22 @@ This is the "assembly (asm)" format.
 
 [MNEMONIC] [DESTINATION].[SOURCE]
 
+[####h] - is an address location
+##h - is hexademical representation of data (a byte of data)
+
+Variables can be declared in the following format and referenced anywhere in the program:
+
+VAR_NAME: ##h, ##h
+
+Each `##h` represents a byte of data, one after another in memory. The memory location doesn't need to specified this way. You can assign as many bytes of data as you want, and each be referenced in array-like fashion with an offset value. E.g. the second byte can be referenced using VAR_NAME + 1. However, there is 64KB of memory, which means ~65k memory addresses can be used (and emulated) so your program cannot exceed this range.
+
 The opcode to mnemonic mappings can be found in the 'isa-instructions.txt' file. This is the standard assembly language format for direct memory manipulation. There is no need to structure instructions in 3 bytes - they are coded for by mnemonics and a consistent structure. 
 
 Each program begins with the `BEGIN` keyword and ends with HLT (halt). 
 Comments are prefixed with `//`. 
 Newlines can be added between instructions if desired for better formatting.
-[####h] - is an address location
-##h - is hexademical representation of data (a byte of data)
+
+The following program begins by storing the value of 2 numbers in memory, then adds them together, before storing the value right after. More examples can be found in the `programs` directory.
 
 */
 
