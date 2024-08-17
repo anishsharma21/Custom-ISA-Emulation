@@ -14,7 +14,7 @@ Example:
 ##h
 ...
 
-Previously, there was need for a "structured" format, but since empty lines are removed from the final parsed file, instruction byte-sequences can be differentiated from data bytes with new lines after every 3 bytes in an instruction. See the example below where instructions (except for the HLT instructon given by FFh) are separated into sequences of 3 bytes.
+Previously, there was need for a "structured" format, but since empty lines are removed from the final interpreted file, instruction byte-sequences can be differentiated from data bytes with new lines after every 3 bytes in an instruction. See the example below where instructions (except for the HLT instructon given by FFh) are separated into sequences of 3 bytes.
 
 There are logical quirks that you must be aware of but don't necessarily need to be specified in documentation - however, one common error is to place data related to program code after data memory allocation. Since the program begins its counter at memory address 0000h, it will read in bytes in sequences of 3 at a time and will treat them as instructions (comprised of byte for the  operation, and 2 bytes for the 16-bit address)
 
