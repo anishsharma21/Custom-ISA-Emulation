@@ -42,7 +42,7 @@ def generate_mem_snapshot(file_contents: list[str]) -> dict[int, int]:
 def to_instructions(memcontents: list[str]) -> list[Tuple[str, int]]:
   # assuming instructions are in order
   i: int = 0
-  instructions: list[Tuple[str, int]]
+  instructions: list[Tuple[str, int]] = []
   while i < len(memcontents):
     line: str = memcontents[i]
     if line[-1] == ":":
@@ -54,9 +54,14 @@ def to_instructions(memcontents: list[str]) -> list[Tuple[str, int]]:
     opcode: int = int(line.removesuffix("h"), 16)
     operation: str = find_operation_from_opcode(opcode)
     address: int = int(memcontents[i+1].removesuffix("h") + memcontents[i+2].removesuffix("h"), 16)
-    print((operation, address)) 
+    instructions.append((operation, address))
     i += 3
-  return [('', 1)]
+  return instructions
+
+def print_instructions(instructions: list[Tuple[str, int]]) -> None:
+  for instruction in instructions:
+      operation, address = instruction
+      print(f"{operation}: {address:#06x}")
 
 def find_operation_from_opcode(opcode: int) -> str:
   switch: dict[int, str] = {

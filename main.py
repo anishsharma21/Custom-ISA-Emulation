@@ -1,5 +1,5 @@
 from typing import Tuple
-from helpers import get_file_contents, to_instructions
+from helpers import get_file_contents, to_instructions, print_instructions
 
 def main():
   while True:
@@ -14,8 +14,7 @@ def main():
     memcontent: list[str] = get_file_contents(file_name)
     print(memcontent)
     instructions: list[Tuple[str, int]] = to_instructions(memcontent)
-    print(instructions)
-
+    print_instructions(instructions)
     break
 
 if __name__ == "__main__":
