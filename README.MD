@@ -62,7 +62,21 @@ This program loads the value at memory `0021h`, then adds the value at memory lo
 
 ### How do I run it?
 
-*not ready to be run yet... but soon!*
+Download the code. Open your terminal and use the commands `ls` and `cd` to list the directories (folders) contents, and change directories until you are in the directory where the `main.py` file exists. Then, run the following command:
+
+```python
+python3 main.py
+```
+
+You'll be prompted with:
+
+```plaintext
+Enter the file name: 
+```
+
+`p1` and `p2` are pre-written programs which you can type in and choose, or you can add your own program file to the `programs` directory. You don't need to specify the extension, you can simply write the name of your file. Programs should however be written with the `.txt` extension.
+
+If you don't have [python3](https://www.python.org/downloads/) installed, go to this link to install it.
 
 ### Contributing
 
