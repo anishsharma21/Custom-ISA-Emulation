@@ -3,6 +3,9 @@ from typing import Tuple
 ### Utilities ###
 
 def get_file_contents(file_name: str) -> list[str]:
+  if not file_name.endswith(".txt"):  
+    file_name += ".txt"
+    
   file_contents: list[str] = []
   
   try:
