@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, List
+from typing import Dict, List
 
 ### Utilities ###
 
@@ -41,30 +41,6 @@ def get_ram_from_mem_contents(file_contents: List[str]) -> dict[int, int]:
       ram[curAddress] = int(line.removesuffix("h"), 16)
       curAddress += 1
   return ram
-
-def file_contents_to_instructions(file_contents: List[str]) -> List[Tuple[str, int]]:
-  # assuming instructions are in order
-  i: int = 0
-  instructions: List[Tuple[str, int]] = []
-  while i < len(file_contents):
-    line: str = file_contents[i]
-    if line[-1] == ":": # memory address declaration
-      i += 1
-      continue
-    if line == "FFh": # HLT
-      break
-    # assuming instructions are written correctly in 3 byte sequences
-    opcode: int = int(line.removesuffix("h"), 16)
-    operation: str = find_operation_from_opcode(opcode)
-    address: int = int(file_contents[i+1].removesuffix("h") + file_contents[i+2].removesuffix("h"), 16)
-    instructions.append((operation, address))
-    i += 3
-  return instructions
-
-def print_instructions(instructions: List[Tuple[str, int]]) -> None:
-  for instruction in instructions:
-      operation, address = instruction
-      print(f"{operation}: {address:#06x}")
 
 def find_operation_from_opcode(opcode: int) -> str:
   switch: Dict[int, str] = {
