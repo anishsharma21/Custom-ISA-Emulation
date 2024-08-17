@@ -1,16 +1,16 @@
-from typing import Tuple
+from typing import Tuple, Dict, List
 
 ### Utilities ###
 
-def get_file_contents(file_name: str) -> list[str]:
+def get_file_contents(file_name: str) -> List[str]:
   if not file_name.endswith(".txt"):  
     file_name += ".txt"
-    
-  file_contents: list[str] = []
+
+  file_contents: List[str] = []
   
   try:
     with open(f'./programs/{file_name}', 'r') as file:
-      file_contents: list[str] = file.readlines()
+      file_contents: List[str] = file.readlines()
   except FileNotFoundError:
     print("File not found")
     print()
@@ -30,22 +30,22 @@ def render_mem_map_from_ram(ram: dict[int, int]) -> None:
     prevAddress = address
     print(f"{address:#06x}: {value:#04x}")
 
-def get_ram_from_mem_contents(file_contents: list[str]) -> dict[int, int]:
+def get_ram_from_mem_contents(file_contents: List[str]) -> dict[int, int]:
   ram = {}
   curAddress = 0x0000
   for line in file_contents:
     if line[-1] == ":":
       curAddress = int(line.removesuffix("h:"), 16)
       ram[curAddress] = 0x00
-    elif curAddress in ram:
-      curAddress += 1
+    elif curAddress in ram or curAddress - 1 in ram:
       ram[curAddress] = int(line.removesuffix("h"), 16)
+      curAddress += 1
   return ram
 
-def file_contents_to_instructions(file_contents: list[str]) -> list[Tuple[str, int]]:
+def file_contents_to_instructions(file_contents: List[str]) -> List[Tuple[str, int]]:
   # assuming instructions are in order
   i: int = 0
-  instructions: list[Tuple[str, int]] = []
+  instructions: List[Tuple[str, int]] = []
   while i < len(file_contents):
     line: str = file_contents[i]
     if line[-1] == ":": # memory address declaration
@@ -61,13 +61,13 @@ def file_contents_to_instructions(file_contents: list[str]) -> list[Tuple[str, i
     i += 3
   return instructions
 
-def print_instructions(instructions: list[Tuple[str, int]]) -> None:
+def print_instructions(instructions: List[Tuple[str, int]]) -> None:
   for instruction in instructions:
       operation, address = instruction
       print(f"{operation}: {address:#06x}")
 
 def find_operation_from_opcode(opcode: int) -> str:
-  switch: dict[int, str] = {
+  switch: Dict[int, str] = {
     0x10: "LOD",
     0x11: "STO",
     0x20: "ADD",

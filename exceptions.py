@@ -1,0 +1,2 @@
+class InvalidOpcode(Exception):
+  pass
