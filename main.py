@@ -19,7 +19,7 @@ def main():
   i: int = 0
   while i < len(file_contents):
     line: str = file_contents[i]
-    if line[-1] == ":": # memory address declaration
+    if line[-1] == ":" or line[0] == "/": # skip memory address declaration
       i += 1
       continue
     if line == "FFh": # HLT
@@ -29,11 +29,16 @@ def main():
     operation: str = find_operation_from_opcode(opcode)
     address: int = int(file_contents[i+1].removesuffix("h") + file_contents[i+2].removesuffix("h"), 16)
 
+    print()
+    print(f"Accumulator value: {accumulator:#04x}")
     if operation == "LOD":
+      print(f"Loading {ram[address]:#04x} value at {address:#06x} into accumulator")
       accumulator = ram[address]
     elif operation == "STO":
+      print(f"Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address]:#04x})")
       ram[address] = accumulator
     elif operation == "ADD":
+      print(f"Adding {ram[address]:#04x} value from {address:#06x} into accumulator")
       accumulator += ram[address]
     else:
       raise InvalidOpcode(f"{line} is an invalid opcode")
