@@ -1,11 +1,13 @@
+from typing import Tuple
+
 ### Utilities ###
 
 def get_file_contents(file_name: str) -> list[str]:
-  contents: list[str] = []
+  memcontents: list[str] = []
   
   try:
     with open(f'./programs/{file_name}', 'r') as file:
-      contents: list[str] = file.readlines()
+      memcontents: list[str] = file.readlines()
   except FileNotFoundError:
     print("File not found")
     print()
@@ -13,7 +15,7 @@ def get_file_contents(file_name: str) -> list[str]:
     print(f"Error: {e}")
     print()
 
-  return [s.strip() for s in contents if s.strip()]
+  return [s.strip() for s in memcontents if s.strip()]
 
 ### Memory ###
 
@@ -37,14 +39,9 @@ def generate_mem_snapshot(file_contents: list[str]) -> dict[int, int]:
       ram[curAddress] = int(line.removesuffix("h"), 16)
   return ram
 
-def run_program(init_ram: dict[int, int]) -> None:
-  instructions: list[list[str | int]] = [[]]
-  for _, value in init_ram.items():
-    cur_instruction_length = len(instructions[-1])
-    if cur_instruction_length == 0:
-      instructions[-1][cur_instruction_length] = find_operation_from_opcode(value)
-    elif cur_instruction_length in [1, 2]:
-      instructions[-1][cur_instruction_length] = value
+def to_instructions(memcontents: list[str]) -> list[Tuple[str, int]]:
+  print(memcontents)
+  return [('', 1)]
 
 def find_operation_from_opcode(opcode: int) -> str:
   switch: dict[int, str] = {
