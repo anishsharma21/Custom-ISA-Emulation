@@ -1,8 +1,12 @@
-# Von Neumann Architecture Memory Emulation
+# Memory Map Emulation
 
 ## Project Overview
 
-This project involves emulating the changing memory space (RAM) in a Von Neumann architected computer. Essentially, programs are written in one of many formats defined by a custom Instruction Set Architecture. There are pre-written programs, but once the main program is run, you can specify your program by its filename, and then watch as the program steps through each instruction in your program. Inspired by the book *CODE: The Hidden Language of Hardware and Software*.
+Have you ever wondered what it means to 'run' a program? What goes on under the hood? What did the first programs look like visually?
+
+This project involves emulating the changing memory map (RAM) in a Von Neumann architected computer as it runs a program, i.e. it shows what happening in a simple computer when a simple (or complex) program is run. Programs are written in a defined format and adhere to a custom Instruction Set Architecture (ISA). When the main program (written in Python) is run, you can specify a program for emulation by its file name, and then step forwards and backwards through the program lifecycle with the `f` and `b` keys.
+
+This project is inspired by the incredible book *CODE: The Hidden Language of Hardware and Software*. A must read for anyone who wants to know how computers really work - completely beginner friendly, no previous knowledge required, and takes you from mere 1's and 0's all the way to building your own computer.
 
 ## ISA Specification
 
