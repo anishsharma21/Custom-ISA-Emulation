@@ -1,3 +1,4 @@
+import os
 from typing import List
 from helpers import get_file_contents, get_ram_from_mem_contents, find_operation_from_opcode, render_mem_map_from_ram
 from exceptions import InvalidOpcode
@@ -10,6 +11,7 @@ def main():
 
   file_contents: List[str] = get_file_contents(file_name)
   ram: dict[int, int] = get_ram_from_mem_contents(file_contents)
+  os.system('clear')
   render_mem_map_from_ram(ram)
 
   accumulator: int = 0x0000
@@ -27,10 +29,6 @@ def main():
     operation: str = find_operation_from_opcode(opcode)
     address: int = int(file_contents[i+1].removesuffix("h") + file_contents[i+2].removesuffix("h"), 16)
 
-    print(f"Operation: {operation}")
-    print(f"{address}: {ram[address]}")
-    print(f"Accumulator value: {accumulator}")
-
     if operation == "LOD":
       accumulator = ram[address]
     elif operation == "STO":
@@ -40,14 +38,11 @@ def main():
     else:
       raise InvalidOpcode(f"{line} is an invalid opcode")
 
-    print(f"{address}: {ram[address]}")
-    print(f"Accumulator value: {accumulator}")
-
     i += 3
 
   print()
-  input("Press enter to continue")
-  print()
+  input("Press enter to see final memory map")
+  os.system('clear')
   render_mem_map_from_ram(ram)
 
 if __name__ == "__main__":
