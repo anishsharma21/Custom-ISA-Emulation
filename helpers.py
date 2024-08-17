@@ -40,7 +40,22 @@ def generate_mem_snapshot(file_contents: list[str]) -> dict[int, int]:
   return ram
 
 def to_instructions(memcontents: list[str]) -> list[Tuple[str, int]]:
-  print(memcontents)
+  # assuming instructions are in order
+  i: int = 0
+  instructions: list[Tuple[str, int]]
+  while i < len(memcontents):
+    line: str = memcontents[i]
+    if line[-1] == ":":
+      i += 1
+      continue
+    if line == "FFh":
+      break
+    # assuming instructions are written correctly in 3 byte sequences
+    opcode: int = int(line.removesuffix("h"), 16)
+    operation: str = find_operation_from_opcode(opcode)
+    address: int = int(memcontents[i+1].removesuffix("h") + memcontents[i+2].removesuffix("h"), 16)
+    print((operation, address)) 
+    i += 3
   return [('', 1)]
 
 def find_operation_from_opcode(opcode: int) -> str:

@@ -12,6 +12,7 @@ def main():
       file_name += ".txt"
 
     memcontent: list[str] = get_file_contents(file_name)
+    print(memcontent)
     instructions: list[Tuple[str, int]] = to_instructions(memcontent)
     print(instructions)
 
