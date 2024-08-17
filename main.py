@@ -28,26 +28,33 @@ def main():
     opcode: int = int(line.removesuffix("h"), 16)
     operation: str = find_operation_from_opcode(opcode)
     address: int = int(file_contents[i+1].removesuffix("h") + file_contents[i+2].removesuffix("h"), 16)
+    i += 3
 
     print()
+
+    # ANSI escape codes for background colors
+    BG_YELLOW = "\033[43m"
+    RESET = "\033[0m"
+
     print(f"Accumulator value: {accumulator:#04x}")
     if operation == "LOD":
-      print(f"Loading {ram[address]:#04x} value at {address:#06x} into accumulator")
-      accumulator = ram[address]
+        print(f"{BG_YELLOW}Loading {ram[address]:#04x} value at {address:#06x} into accumulator{RESET}")
+        accumulator = ram[address]
     elif operation == "STO":
-      print(f"Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address]:#04x})")
-      ram[address] = accumulator
+        print(f"{BG_YELLOW}Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address]:#04x}){RESET}")
+        ram[address] = accumulator
     elif operation == "ADD":
-      print(f"Adding {ram[address]:#04x} value from {address:#06x} into accumulator")
-      accumulator += ram[address]
+        print(f"{BG_YELLOW}Adding {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
+        accumulator += ram[address]
     else:
-      raise InvalidOpcode(f"{line} is an invalid opcode")
-
-    i += 3
+        raise InvalidOpcode(f"{line} is an invalid opcode")
+    
     print()
     input("Press enter to see updated ram")
     os.system('clear')
     render_mem_map_from_ram(ram)
+  
+  # final ram memory map
   os.system('clear')
   render_mem_map_from_ram(ram)
 
