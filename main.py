@@ -39,9 +39,10 @@ def main():
       raise InvalidOpcode(f"{line} is an invalid opcode")
 
     i += 3
-
-  print()
-  input("Press enter to see final memory map")
+    print()
+    input("Press enter to see updated ram")
+    os.system('clear')
+    render_mem_map_from_ram(ram)
   os.system('clear')
   render_mem_map_from_ram(ram)
 
