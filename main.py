@@ -1,7 +1,7 @@
 import os
 from typing import List
 from helpers import get_file_contents, get_ram_from_mem_contents, find_operation_from_opcode, render_mem_map_from_ram
-from exceptions import InvalidOpcode
+from exceptions import InvalidOpcode, InvalidAddress
 
 def main():
   file_name: str = str(input("Enter the file name: ")).strip()
@@ -40,7 +40,7 @@ def main():
     
     if address not in ram:
        ram[address] = 0x00
-       
+
     if operation == "LOD":
         print(f"{BG_YELLOW}Loading {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
         accumulator = ram[address]
@@ -50,6 +50,16 @@ def main():
     elif operation == "ADD":
         print(f"{BG_YELLOW}Adding {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
         accumulator += ram[address]
+    elif operation == "SUB":
+       print(f"{BG_YELLOW}Subtracting {ram[address]:#04x} value from {address:#06x} from accumulator{RESET}")
+       accumulator -= ram[address]
+    elif operation == "JMP":
+       for j in range(len(file_contents)):
+           if file_contents[j] == ((f"{address:04x}")[2:4] + "h") and file_contents[j+1] == ((f"{address:04x}")[4:6] + "h"):
+               i = j
+               print(f"Jumping to address {address}")
+               break
+       raise InvalidAddress(f"Address {address} is not valid")
     else:
         raise InvalidOpcode(f"{line} is an invalid opcode")
     

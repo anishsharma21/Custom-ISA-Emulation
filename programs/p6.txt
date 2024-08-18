@@ -1,0 +1,27 @@
+; adding 2 numbers then subtracting another
+
+0000h:
+10h
+10h
+0Bh
+
+20h
+10h
+0Ch
+
+21h
+10h
+0Dh
+
+11h
+10h
+0Eh
+
+FFh
+
+100Bh:
+08h
+100Ch:
+03h
+100Dh:
+02h

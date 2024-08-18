@@ -1,0 +1,21 @@
+; subtract 2 numbers
+
+0000h:
+10h
+10h
+00h
+
+21h
+10h
+01h
+
+11h
+10h
+02h
+
+FFh
+
+1000h:
+05h
+1001h:
+03h
