@@ -22,23 +22,24 @@ def get_file_contents(file_name: str) -> List[str]:
 
 ### Memory ###
 
-def render_mem_map_from_ram(ram: dict[int, int]) -> None:
+def render_mem_map_from_ram(ram: dict[int, List[int]]) -> None:
   prevAddress = 0
   for address, value in ram.items():
     if prevAddress < address - 1:
       print("...")
     prevAddress = address
-    print(f"{address:#06x}: {value:#04x}")
+    print(f"{address:#06x}: {value[0]:#04x}")
 
-def get_ram_from_mem_contents(file_contents: List[str]) -> dict[int, int]:
-  ram = {}
-  curAddress = 0x0000
+def get_ram_from_mem_contents(file_contents: List[str]) -> dict[int, List[int]]:
+  ram: dict[int, List[int]] = {}
+  curAddress: int = 0x0000
+  index: int = 0
   for line in file_contents:
     if line[-1] == ":":
       curAddress = int(line.removesuffix("h:"), 16)
-      ram[curAddress] = 0x00
+      ram[curAddress] = [0x00, index]
     elif curAddress in ram or curAddress - 1 in ram:
-      ram[curAddress] = int(line.removesuffix("h"), 16)
+      ram[curAddress] = [int(line.removesuffix("h"), 16), index]
       curAddress += 1
   return ram
 
