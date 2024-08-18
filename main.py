@@ -89,7 +89,7 @@ def main():
   
   # final ram memory map
   os.system('clear')
-  print(f"\033[38;5;27mFinal Memory Map of RAM\033[0m")
+  print(f"\033[38;5;27mFinal Memory Map\033[0m")
   print()
   print("-" * 10)
   render_mem_map_from_ram(ram)

@@ -1,9 +1,9 @@
 /*
-Last updated: 15th August 2024
+Last updated: 18th August 2024
 
-This is the "raw memory" format. 
+This is the "raw memory" format where you write machine code to create programs.
 
-Programs are composed of "memory allocation blocks", or MAB's for short. To begin a MAB, first declare a starting address where data allocations will begin from. Then, each newline following this declaration will contain 2 bytes of data stored in the contiguous section of memory. This memory input can be code (opcodes) or just plain data. 
+To begin writing a program, first declare a starting address where data allocations will begin from. Then, each newline following this declaration will contain a byte of data stored in the contiguous section of memory. This memory input can be code (opcodes) or just plain hex data. 
 There are hence 2 program semantics to adhere to - memory declarations and byte input.
 It should be noted though that instructions are read in 3 bytes at a time where the first byte is translated to an opcode, then the following 2 bytes refer to a 16-bit memory address, in big-endian form, such that the first byte relates to the higher byte in the 16-bit address. A table for the ISA can be found in the isa-instructions.txt file. 
 
@@ -14,12 +14,12 @@ Example:
 ##h
 ...
 
-Previously, there was need for a "structured" format, but since empty lines are removed from the final interpreted file, instruction byte-sequences can be differentiated from data bytes with new lines after every 3 bytes in an instruction. See the example below where instructions (except for the HLT instructon given by FFh) are separated into sequences of 3 bytes.
+Previously, there was need for a "structured" format where 'code' blocks would need to be separate from 'data' block, but since empty lines are removed from the final interpreted file, instruction byte-sequences can be differentiated from data bytes with new lines after every 3 bytes in an instruction. See the example below where instructions (except for the HLT instruction which is just given by FFh) are separated into sequences of 3 bytes.
 
 There are logical quirks that you must be aware of but don't necessarily need to be specified in documentation - however, one common error is to place data related to program code after data memory allocation. Since the program begins its counter at memory address 0000h, it will read in bytes in sequences of 3 at a time and will treat them as instructions (comprised of byte for the  operation, and 2 bytes for the 16-bit address). That means all bytes from 0000h address onwards are processed as instructions. 
 Another quirk, which is more subtle and unlikely to create problems, is that addresses written to on the fly (not present in the original program file) can only be written or read, but the program cannot run from that address onwards - if this doesn't make sense, good, you'll probably not run into this problem unless you want your program to write programs for itself and then jump to those programs on the fly.
 
-Program below simply adds two 8-bit numbers and stores it in the memory address directly after. More examples can be found in the `programs` directory. You can run this program by running the main file (python3 main.py) and typing in 'p1' as the file. If all goes well, the value at memory address 1002h should 01h + 01h = 02h.
+Program below simply adds two 8-bit numbers and store it in the memory address directly after. More examples can be found in the `programs` directory. You can run this program by running the main file (python3 main.py) and typing in 'p1' as the file. If all goes well, the value at memory address 1002h should 01h + 01h = 02h.
 
 */
 

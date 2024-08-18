@@ -4,13 +4,15 @@
 
 Have you ever wondered what it means to 'run' a program? What goes on under the hood? What did the first programs look like visually?
 
-This project involves emulating the changing memory map (RAM) in a Von Neumann architected computer as it runs a program, i.e. it shows what happening in a simple computer when a simple (or complex) program is run. Programs are written in a defined format and adhere to a custom Instruction Set Architecture (ISA). When the main program (written in Python) is run, you can specify a program for emulation by its file name, and then step forwards and backwards through the program lifecycle with the `f` and `b` keys.
+Well, in this project, you can write machine code and watch your program run visually in memory (emulated).
 
-This project is inspired by the incredible book *CODE: The Hidden Language of Hardware and Software*. A must read for anyone who wants to know how computers really work - completely beginner friendly, no previous knowledge required, and takes you from mere 1's and 0's all the way to building your own computer.
+In more technical terms, this project involves emulating the changing memory map (RAM) in a Von Neumann architected computer as it runs a program, i.e. it shows what happening in a simple computer when a simple (or complex) program is run. Programs are written in a defined format and adhere to a custom Instruction Set Architecture (ISA). When the main program (written in Python) is run, you can specify a program for emulation by its file name, and then step forwards by pressing `enter`, seeing the operations being performed, a description of each step, and of course, a map of the memory as it changes overtime.
+
+This project is inspired by the incredible book *CODE: The Hidden Language of Hardware and Software*. A must read for anyone who wants to know how computers really work from the ground-up - it's completely beginner friendly, no previous knowledge required, and takes you from mere 1's and 0's all the way to building your own computer.
 
 ## ISA Specification
 
-### Instruction Set Architecture for Relay-Powered Von Neumann Architecture
+### Instruction Set Architecture
 
 | Operation            | Code | Mnemonic |
 |----------------------|------|----------|
@@ -30,45 +32,72 @@ This project is inspired by the incredible book *CODE: The Hidden Language of Ha
 - **A**: Accumulator
 - **Memory Range**: [0000h - FFFFh] (64KB memory, 16-bit addresses)
 
-### Operation Format
+### Machine Code Format
 
-- **ISA Format**: `[MNEMONIC] [DESTINATION].[SOURCE]`
-- **Machine Language Format**: 
-  - `[ADDRESS]: [OPCODE]`
-  - `[ADDRESS]: [HIGH-BYTE]`
-  - `[ADDRESS]: [LOW-BYTE]`
+Each program consists of memory address declarations, and memory inputs that follow. 
 
-- **Endianness**: Big-endian (high-byte stored in lower address)
+```plaintext
+[ADDRESS]:
+##h
+##h
+```
+
+You declare a memory address, and then bytes that you want to input to create your program.
+
+Further details about creating your own programs can be found in `documentation/isa-raw-format.txt`.
+
+**Endianness**: Big-endian (high-byte stored in lower address)
 
 ## Example Program
 
-### Description
-
-This program loads the value at memory `0021h`, then adds the value at memory location `0023h`. It then stores the current accumulator value at address `0025h`. Next, it loads the value at address `0020h`, adds the value at address `0022h`, and stores the current accumulator value at address `0024h` before halting.
-
-### Machine Language Instructions
+Here is a simple program that adds 2 numbers together:
 
 ```plaintext
-0000h: 10h 00h 21h
-0003h: 20h 00h 23h
-0006h: 11h 00h 25h
-0009h: 10h 00h 20h
-000Ch: 22h 00h 22h
-000Fh: 11h 00h 24h
-0012h: FFh
+0000h:
+10h
+10h
+00h
+
+20h
+10h
+01h
+
+11h
+10h
+02h
+
+FFh
+
+1000h:
+01h
+01h
+00h
 ```
+
+In the above program, the line `0000h` indicates that from here onwards, each newline will correspond to a byte of data the will need to be inputted into memory. In this case, you can see the bytes being inputted in sequences of 3. These are instructions - the first byte is the instruction opcode (see above for the list of opcodes) and the next 2 relate to a 16-bit address in memory. You don't need to add new lines between each instruction sequence, but it makes it easier to read and distinguish between 'code' and 'data'. The memory declared after `1000h` is used by the program as memory to be accessed. 
+
+This program can be run by choosing `p1.txt` (or just `p1`) as the file when running the main program.
+
+### Description
+
+The program above loads the value at memory `1000h`, then adds the value at memory location `1001h`. It then stores the current accumulator value at address `1002h` before halting.
 
 ### Emulation Goals
 
 - `Real-Time Memory Display`: The Python program will display the entire memory set in the terminal, updating in real-time with each instruction cycle.
-- `Instruction Highlighting`: Each address will be highlighted as the program progresses to show what is happening at each step.
-- `Format Flexibility`: The program will support both my custom ISA and machine language formats for input instructions.
+- `Instruction Highlighting`: Each instruction will be highlighted as the program progresses to show what is happening at each step.
 
 ### How do I run it?
 
-Download the code. Open your terminal and use the commands `ls` and `cd` to list the directories (folders) contents, and change directories until you are in the directory where the `main.py` file exists. Then, run the following command:
+Open your terminal and run the following command:
 
-```python
+```bash
+git clone https://github.com/anishsharma21/Memory-Map-Emulator
+```
+
+Then, in the same directory, run the following command:
+
+```bash
 python3 main.py
 ```
 
@@ -78,7 +107,9 @@ You'll be prompted with:
 Enter the file name: 
 ```
 
-`p1` and `p2` are pre-written programs which you can type in and choose, or you can add your own program file to the `programs` directory. You don't need to specify the extension, you can simply write the name of your file. Programs should however be written with the `.txt` extension.
+There are many pre-written programs you can run and can be found in the `programs` directory. You can type in the full filename, like `p1.txt` or you can just type in `p1`. This way, you don't need to specify the extension, you can simply write the name of your file. Programs should however be written with the `.txt` extension.
+
+You can also add your own programs to the `programs` directory.
 
 If you don't have [python3](https://www.python.org/downloads/) installed, go to this link to install it.
 

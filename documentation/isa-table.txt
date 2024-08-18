@@ -16,19 +16,3 @@
 | Jump if Not Carry    | 34h  | JNC      |
 | Halt                 | FFh  | HLT      |
 ------------------------------------------
-
-A - accumulator
-Memory range = [0000h - FFFFh] (64KB memory, 16-bit addresses, 8192x8 RAM)
-
-Operation format (ISA):
-[MNEMONIC] [DESTINATION].[SOURCE]
-
-Operation format (machine language): 
-[ADDRESS]: [OPCODE]
-[ADDRESS]: [HIGH-BYTE]
-[ADDRESS]: [LOW-BYTE]
-
-Follows Little-endian format (lower-byte stored in lower address)
-Implementations can be done in ISA or machine language format - goal is to create assemblers/compilers and emulators for both in Python such that program running and memory updates can be viewed in realtime.
-
-Both Machine Language and ISA formats can be found under the 'isa' directory. Example programs can be found in the 'programs' directory.
