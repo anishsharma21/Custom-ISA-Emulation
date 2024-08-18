@@ -37,6 +37,10 @@ def main():
     RESET = "\033[0m"
 
     print(f"Accumulator value: {accumulator:#04x}")
+    
+    if address not in ram:
+       ram[address] = 0x00
+       
     if operation == "LOD":
         print(f"{BG_YELLOW}Loading {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
         accumulator = ram[address]

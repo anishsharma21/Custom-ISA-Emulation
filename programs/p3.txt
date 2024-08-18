@@ -1,19 +1,15 @@
+; Copy value from one address to another
+
 0000h:
 10h
 10h
-06h
-
-20h
-10h
-07h
+08h
 
 11h
 10h
-06h
+09h
 
 FFh
 
-1006h:
-05h
-1007h:
-01h
+1008h:
+0Ah
