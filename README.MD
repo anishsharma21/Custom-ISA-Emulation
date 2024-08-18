@@ -1,4 +1,4 @@
-# Memory Map Emulation
+# Memory Map Emulator
 
 ## Project Overview
 
