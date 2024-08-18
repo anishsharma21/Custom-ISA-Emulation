@@ -49,6 +49,7 @@ def find_operation_from_opcode(opcode: int) -> str:
     0x20: "ADD",
     0x21: "SUB",
     0x30: "JMP",
+    0x31: "JZ",
     0xFF: "HLT",
   }
   return switch.get(opcode, "ERR")

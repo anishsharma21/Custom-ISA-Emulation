@@ -39,27 +39,43 @@ def main():
     print(f"Accumulator value: {accumulator:#04x}")
     
     if address not in ram:
-       ram[address] = 0x00
+      ram[address] = 0x00
 
     if operation == "LOD":
-        print(f"{BG_YELLOW}Loading {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
-        accumulator = ram[address]
+      print(f"{BG_YELLOW}Loading {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
+      accumulator = ram[address]
     elif operation == "STO":
-        print(f"{BG_YELLOW}Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address]:#04x}){RESET}")
-        ram[address] = accumulator
+      print(f"{BG_YELLOW}Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address]:#04x}){RESET}")
+      ram[address] = accumulator
     elif operation == "ADD":
-        print(f"{BG_YELLOW}Adding {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
-        accumulator += ram[address]
+      print(f"{BG_YELLOW}Adding {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
+      accumulator += ram[address]
     elif operation == "SUB":
-       print(f"{BG_YELLOW}Subtracting {ram[address]:#04x} value from {address:#06x} from accumulator{RESET}")
-       accumulator -= ram[address]
+      print(f"{BG_YELLOW}Subtracting {ram[address]:#04x} value from {address:#06x} from accumulator{RESET}")
+      accumulator -= ram[address]
     elif operation == "JMP":
-       for j in range(len(file_contents)):
-           if file_contents[j] == ((f"{address:04x}")[2:4] + "h") and file_contents[j+1] == ((f"{address:04x}")[4:6] + "h"):
-               i = j
-               print(f"Jumping to address {address}")
-               break
-       raise InvalidAddress(f"Address {address} is not valid")
+      jumped: bool = False
+      for j in range(len(file_contents) - 1):
+          if file_contents[j] == ((f"{address:#04x}")[2:4] + "h") and file_contents[j+1] == ((f"{address:#04x}")[4:6] + "h"):
+              i = j
+              print(f"Jumping to address {address}")
+              jumped = True
+              break
+      if not jumped:
+        raise InvalidAddress(f"Did not jump to address {address}")
+    elif operation == "JZ":
+      jumped: bool = False
+      for j in range(len(file_contents) - 1):
+          if file_contents[j] == ((f"{address:#04x}")[2:4] + "h") and file_contents[j+1] == ((f"{address:#04x}")[4:6] + "h") or file_contents[j] == ((f"{address:#04x}")[2:4] + "h") == "ffh":
+            if accumulator == 0x00:
+              i = j
+              print(f"Not jumping since accumulator is 0x00")
+            else:
+              print(f"Jumping to address {address}")
+            jumped = True
+            break
+      if not jumped:
+        raise InvalidAddress(f"Address {address:#06x} was not found\nError on operation {line}")
     else:
         raise InvalidOpcode(f"{line} is an invalid opcode")
     
