@@ -38,7 +38,7 @@ def main():
 
     print(f"Accumulator value: {accumulator:#04x}")
     if operation == "LOD":
-        print(f"{BG_YELLOW}Loading {ram[address]:#04x} value at {address:#06x} into accumulator{RESET}")
+        print(f"{BG_YELLOW}Loading {ram[address]:#04x} value from {address:#06x} into accumulator{RESET}")
         accumulator = ram[address]
     elif operation == "STO":
         print(f"{BG_YELLOW}Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address]:#04x}){RESET}")
