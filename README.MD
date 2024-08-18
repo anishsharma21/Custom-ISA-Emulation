@@ -30,9 +30,11 @@ You'll be prompted with:
 Enter the file name: 
 ```
 
-There are many pre-written programs you can run and can be found in the `programs` directory. You can type in the full filename, like `p1.txt` or you can just type in `p1`. This way, you don't need to specify the extension, you can simply write the name of your file. Programs should however be written with the `.txt` extension.
+There are many pre-written programs you can run and can be found in the `programs` directory. You can type in the full filename, like `p1.txt` or you can just type in `p1`. This way, you don't need to specify the extension, you can simply write the name of your file. 
 
-You can also add your own programs to the `programs` directory.
+You can also add your own programs to the `programs` directory. Programs must be written with the `.txt` extension.
+
+P.S. `p7.txt` is pretty interesting to run 👀
 
 If you don't have [python3](https://www.python.org/downloads/) installed, go to this link to install it.
 
