@@ -1,3 +1,5 @@
+; adds 2 numbers together
+
 0000h:
 10h
 10h

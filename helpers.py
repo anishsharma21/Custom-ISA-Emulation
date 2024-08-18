@@ -18,7 +18,7 @@ def get_file_contents(file_name: str) -> List[str]:
     print(f"Error: {e}")
     print()
 
-  return [s.strip() for s in file_contents if s.strip()]
+  return [s.strip() for s in file_contents if s.strip() and not s.startswith(';')]
 
 ### Memory ###
 
