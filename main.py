@@ -3,10 +3,10 @@ from typing import List
 from helpers import get_file_contents, get_ram_from_mem_contents, find_operation_from_opcode, render_mem_map_from_ram
 from exceptions import InvalidOpcode, InvalidAddress
 
-# ANSI escape codes for background colors
-BG_YELLOW = "\033[43m"
-BG_BLUE = "\033[44m"
-BG_ORANGE = "\033[48;5;202m"
+# ANSI escape codes for font colors
+FG_YELLOW = "\033[33m"
+FG_BLUE = "\033[34m"
+FG_ORANGE = "\033[38;5;202m"
 RESET = "\033[0m"
 
 def main():
@@ -20,7 +20,7 @@ def main():
   index: int = 0
   
   os.system('clear')
-  print(f"\033[38;5;27mInstruction 0\033[0m")
+  print(f"\033[38;5;27mInitial memory map\033[0m")
   print()
   print("-" * 10)
   render_mem_map_from_ram(ram)
@@ -49,16 +49,16 @@ def main():
       ram[address] = [0x00]
 
     if operation == "LOD":
-      print(f"{BG_YELLOW}Loading {ram[address][0]:#04x} value from {address:#06x} into accumulator{RESET}")
+      print(f"{FG_YELLOW}Loading {ram[address][0]:#04x} value from {address:#06x} into accumulator{RESET}")
       accumulator = ram[address][0]
     elif operation == "STO":
-      print(f"{BG_YELLOW}Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address][0]:#04x}){RESET}")
+      print(f"{FG_YELLOW}Storing {accumulator:#04x} value from accumulator into address {address:#06x} ({ram[address][0]:#04x}){RESET}")
       ram[address][0] = accumulator
     elif operation == "ADD":
-      print(f"{BG_YELLOW}Adding {ram[address][0]:#04x} value from {address:#06x} into accumulator{RESET}")
+      print(f"{FG_YELLOW}Adding {ram[address][0]:#04x} value from {address:#06x} into accumulator{RESET}")
       accumulator += ram[address][0]
     elif operation == "SUB":
-      print(f"{BG_YELLOW}Subtracting {ram[address][0]:#04x} value from {address:#06x} from accumulator{RESET}")
+      print(f"{FG_YELLOW}Subtracting {ram[address][0]:#04x} value from {address:#06x} from accumulator{RESET}")
       accumulator -= ram[address][0]
     elif operation == "JMP":
       # not implemented
@@ -70,10 +70,10 @@ def main():
         raise InvalidAddress(f"Value {ram[address][0]} is not declared in original file and cannot be jumped to\nError at address {address}\nError on operation {line}")
       
       if accumulator == 0x00:
-        print(f"{BG_ORANGE}Not jumping since accumulator is 0x00{RESET}")
+        print(f"{FG_ORANGE}Not jumping since accumulator is 0x00{RESET}")
       else:
         index = jmp_index
-        print(f"{BG_ORANGE}Jumping to address {int(file_contents[jmp_index].removesuffix("h:"), 16):#06x}{RESET}")
+        print(f"{FG_ORANGE}Jumping to address {int(file_contents[jmp_index].removesuffix("h:"), 16):#06x}{RESET}")
 
     else:
         raise InvalidOpcode(f"{line} is an invalid opcode")
@@ -81,7 +81,7 @@ def main():
     print()
     input("Press enter to see updated ram")
     os.system('clear')
-    print(f"\033[38;5;27mInstruction {(index - 1) // 3 if index > 0 else 0}\033[0m")
+    print(f"\033[38;5;27mAfter Instruction {(index - 1) // 3 if index > 0 else 0}: {operation}\033[0m")
     print()
     print("-" * 10)
     render_mem_map_from_ram(ram)
